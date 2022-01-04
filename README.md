@@ -1,12 +1,12 @@
 
 # Onboard Allan Oliveira
 
-Allan Oliveira,first onboarding project at Taqtile.
+Allan Oliveira, first onboarding project at Taqtile.
 
 
 ## Environment and tools
 
-macOS 11.6.1
+macOS: 11.6.1
 
 React: 17.0.2
 
