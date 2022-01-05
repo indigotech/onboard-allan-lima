@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Login() {
+function LoginPage() {
 
   return (
     <div className='Login'>
