@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import './login.page.style.css';
+
+const regexPassword = new RegExp('^(?=.*[0-9])(?=.*[a-zA-Z])(?=.+$)');
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -7,29 +10,23 @@ function LoginPage() {
   const [passwordValid, setPasswordValid] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-    setEmailValid(true);
+    const email: string = event.target.value;
+    setEmail(email);
 
-    if (!event.target.checkValidity()) {
-      setEmailValid(false);
-    }
-  }
+    const emailValid: boolean = event.target.checkValidity();
+    setEmailValid(emailValid);
+  };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-    setPasswordValid(true);
+    const password: string = event.target.value;
+    setPassword(password);
 
-    const reg = new RegExp('^(?=.*[0-9])(?=.*[a-zA-Z])(?=.+$)');
+    const passwordValid: boolean = event.target.checkValidity() && regexPassword.test(password);
+    setPasswordValid(passwordValid);
+  };
 
-    if (!event.target.checkValidity() || !reg.test(password)) {
-      
-      setPasswordValid(false);
-    }
-  }
-
-  const submit = () => {
+  const handleSubmit = () => {
     if (emailValid && passwordValid) {
       alert('Login válido!');
       console.log(email);
@@ -37,35 +34,29 @@ function LoginPage() {
     } else {
       alert('Há erros com o formulário!');
     }
-    
+
     setSubmitted(true);
-  }
-
-
+  };
 
   return (
-    <div className='Login'>
+    <div className='LoginContainer'>
       <h1>Bem-vindo(a) à Taqtile!</h1>
-      <form>
-        <label>
-          E-mail:
-          <input type='email' name='email' onChange={handleEmailChange} required/>
-        </label>
-        <br/>
-        {submitted && !emailValid ? <div>Email inválido!<br/></div> : ''}
-        <label>
-          Senha:
-          <input
-            type='password'
-            name='password'
-            onChange={handlePasswordChange}
-            required
-            minLength={7}
-          />
-        </label>
-        {submitted && !passwordValid ? <div>Senha inválida! (+7 caracteres e ao menos uma letra e um número)<br/></div> : ''}
-        <br/>
-        <input type='button' value='Login' onClick={submit} />
+      <form className='Form'>
+        <div className='Input'>
+          <label htmlFor='email'>E-mail</label>
+          <input type='email' name='email' onChange={handleEmailChange} required />
+        </div>
+        <div className='ErrorMessage'>{submitted && !emailValid ? <p>Email inválido!</p> : ''}</div>
+
+        <div className='Input'>
+          <label htmlFor='password'>Senha</label>
+          <input type='password' name='password' onChange={handlePasswordChange} required minLength={7} />
+        </div>
+        <div className='ErrorMessage'>
+          {submitted && !passwordValid ? <p>Senha inválida! (+7 caracteres e ao menos uma letra e um número)</p> : ''}
+        </div>
+
+        <input type='button' value='Login' className='ButtonSubmit' onClick={handleSubmit} />
       </form>
     </div>
   );
