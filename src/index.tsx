@@ -6,6 +6,7 @@ import LoginPage from './pages/login.page';
 import reportWebVitals from './reportWebVitals';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { CookiesProvider } from 'react-cookie';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 const link = createHttpLink({
   uri: 'https://tq-template-server-sample.herokuapp.com/graphql',
@@ -17,15 +18,28 @@ const client = new ApolloClient({
   link,
 });
 
+const rootElement = document.getElementById('root');
+
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <CookiesProvider>
-        <LoginPage />
-      </CookiesProvider>
-    </ApolloProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Navigate to='/login' />} />
+        <Route path='/react' element={<App></App>} />
+        <Route
+          path='login'
+          element={
+            <ApolloProvider client={client}>
+              <CookiesProvider>
+                <LoginPage />
+              </CookiesProvider>
+            </ApolloProvider>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root'),
+  rootElement,
 );
 
 // If you want to start measuring performance in your app, pass a function
