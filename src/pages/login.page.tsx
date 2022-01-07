@@ -1,17 +1,10 @@
 import { gql, useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
+import LoginMutation from 'server/mutations/login';
 import './login.page.style.css';
 
 const regexPassword = new RegExp('^(?=.*[0-9])(?=.*[a-zA-Z])(?=.+$)');
-
-const LOGIN_MUTATION = gql`
-  mutation LoginMutation($email: String!, $password: String!) {
-    login(data: { email: $email, password: $password }) {
-      token
-    }
-  }
-`;
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -20,7 +13,7 @@ function LoginPage() {
   const [passwordValid, setPasswordValid] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [cookies, setCookie] = useCookies(['token']);
-  const [login, { loading, error }] = useMutation(LOGIN_MUTATION);
+  const [login, { loading, error }] = useMutation(LoginMutation);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const email: string = event.target.value;
