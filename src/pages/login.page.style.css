@@ -1,0 +1,33 @@
+.LoginContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ButtonSubmit {
+  font-weight: bold;
+  background-color: black;
+  font-size: 20px;
+  color: white;
+  margin: 5px;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ErrorMessage {
+    height: 40px;
+}
+
+.ErrorMessage p {
+    color: red;
+}
