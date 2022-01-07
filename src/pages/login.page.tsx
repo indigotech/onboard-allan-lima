@@ -3,6 +3,7 @@ import { validateEmail, validatePassword } from 'helpers/login.validations';
 import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import LoginMutation from 'server/mutations/login';
+import { useNavigate } from 'react-router-dom';
 import './login.page.style.css';
 
 function LoginPage() {
@@ -13,6 +14,7 @@ function LoginPage() {
   const [submitted, setSubmitted] = useState(false);
   const [cookies, setCookie] = useCookies(['token']);
   const [login, { loading, error }] = useMutation(LoginMutation);
+  const navigate = useNavigate();
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const email: string = event.target.value;
@@ -37,6 +39,7 @@ function LoginPage() {
         variables: { email: email, password: password },
         onCompleted: ({ login }) => {
           setCookie('token', login.token);
+          navigate("/app/content");
         },
       });
     }

@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { CookiesProvider } from 'react-cookie';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import ContentPage from './pages/content.page';
 
 const link = createHttpLink({
   uri: 'https://tq-template-server-sample.herokuapp.com/graphql',
@@ -22,22 +23,22 @@ const rootElement = document.getElementById('root');
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Navigate to='/login' />} />
-        <Route path='/react' element={<App></App>} />
-        <Route
-          path='login'
-          element={
-            <ApolloProvider client={client}>
-              <CookiesProvider>
-                <LoginPage />
-              </CookiesProvider>
-            </ApolloProvider>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <ApolloProvider client={client}>
+      <CookiesProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/app' element={<App></App>}>
+              <Route path='content' element={<ContentPage></ContentPage>} />
+              <Route path='login' element={<LoginPage />} />
+            </Route>
+            <Route
+              path='*'
+              element={<Navigate to="/app/login" />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </CookiesProvider>
+    </ApolloProvider>
   </React.StrictMode>,
   rootElement,
 );
