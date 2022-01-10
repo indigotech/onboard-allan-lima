@@ -1,14 +1,14 @@
 const regexPassword = new RegExp('^(?=.*[0-9])(?=.*[a-zA-Z])(?=.+$)');
 
 export const validateEmail = (emailTarget: EventTarget & HTMLInputElement): boolean => {
-    const emailValid: boolean = emailTarget.checkValidity();
+    const isEmailValid: boolean = emailTarget.checkValidity();
     
-    return emailValid;
+    return isEmailValid;
 }
 
 export const validatePassword = (passwordTarget: EventTarget & HTMLInputElement): boolean => {
     const password: string = passwordTarget.value;
-    const passwordValid: boolean = passwordTarget.checkValidity() && regexPassword.test(password);
+    const isPasswordValid: boolean = passwordTarget.checkValidity() && regexPassword.test(password);
 
-    return passwordValid;
+    return isPasswordValid;
 }
