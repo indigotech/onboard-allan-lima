@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { validateEmail, validatePassword } from 'helpers/login.validations';
+import Spinner from 'components/spinner.component';
 import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import LoginMutation from 'server/mutations/login';
@@ -65,7 +66,7 @@ function LoginPage() {
           {submitted && !passwordValid ? <p>Senha inválida! (+7 caracteres e ao menos uma letra e um número)</p> : ''}
         </div>
         {loading ? (
-          <div className='Loader'></div>
+          <Spinner></Spinner>
         ) : (
           <input type='button' value='Login' className='ButtonSubmit' onClick={handleSubmit} />
         )}
