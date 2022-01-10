@@ -1,10 +1,9 @@
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import { validateEmail, validatePassword } from 'helpers/login.validations';
 import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import LoginMutation from 'server/mutations/login';
 import './login.page.style.css';
-
-const regexPassword = new RegExp('^(?=.*[0-9])(?=.*[a-zA-Z])(?=.+$)');
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -19,7 +18,7 @@ function LoginPage() {
     const email: string = event.target.value;
     setEmail(email);
 
-    const emailValid: boolean = event.target.checkValidity();
+    const emailValid: boolean = validateEmail(event.target);
     setEmailValid(emailValid);
   };
 
@@ -27,12 +26,12 @@ function LoginPage() {
     const password: string = event.target.value;
     setPassword(password);
 
-    const passwordValid: boolean = event.target.checkValidity() && regexPassword.test(password);
+    const passwordValid: boolean = validatePassword(event.target);
     setPasswordValid(passwordValid);
   };
 
-  const handleSubmit = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+    event.preventDefault();
     if (emailValid && passwordValid) {
       login({
         variables: { email: email, password: password },
