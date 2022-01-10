@@ -3,9 +3,9 @@ import { validateEmail, validatePassword } from 'helpers/login.validations';
 import Spinner from 'components/spinner.component';
 import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
-import LoginMutation from 'server/mutations/login';
 import { useNavigate } from 'react-router-dom';
 import './login.page.style.css';
+import { LoginMutation } from 'server/mutations/login';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
