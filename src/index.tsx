@@ -4,12 +4,28 @@ import './index.css';
 import App from './App';
 import LoginPage from './pages/login.page';
 import reportWebVitals from './reportWebVitals';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import { CookiesProvider } from 'react-cookie';
+
+const link = createHttpLink({
+  uri: 'https://tq-template-server-sample.herokuapp.com/graphql',
+  credentials: 'same-origin',
+});
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link,
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <LoginPage />
+    <ApolloProvider client={client}>
+      <CookiesProvider>
+        <LoginPage />
+      </CookiesProvider>
+    </ApolloProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function
