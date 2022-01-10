@@ -40,7 +40,7 @@ function LoginPage() {
         variables: { email: email, password: password },
         onCompleted: ({ login }) => {
           setCookie('token', login.token);
-          navigate('/app/content');
+          navigate('/app/users');
         },
       });
     }

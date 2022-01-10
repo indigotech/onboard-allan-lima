@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { CookiesProvider } from 'react-cookie';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import ContentPage from './pages/content.page';
+import UsersListPage from './pages/users-list.page';
 
 const link = createHttpLink({
   uri: 'https://tq-template-server-sample.herokuapp.com/graphql',
@@ -28,7 +28,7 @@ ReactDOM.render(
         <BrowserRouter>
           <Routes>
             <Route path='/app' element={<App></App>}>
-              <Route path='content' element={<ContentPage></ContentPage>} />
+              <Route path='users' element={<UsersListPage></UsersListPage>} />
               <Route path='login' element={<LoginPage />} />
             </Route>
             <Route
