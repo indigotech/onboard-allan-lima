@@ -7,7 +7,7 @@ export const mockUserList: User[] = [
   },
   {
     name: "Carla Santana",
-    email: "carla_sentana@gmail.com"
+    email: "carla_santana@gmail.com"
   },
   {
     name: "Rodrigo Diaz",

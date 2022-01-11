@@ -27,8 +27,8 @@ ReactDOM.render(
       <CookiesProvider>
         <BrowserRouter>
           <Routes>
-            <Route path='/app' element={<App></App>}>
-              <Route path='users' element={<UsersListPage></UsersListPage>} />
+            <Route path='/app' element={<App />}>
+              <Route path='users' element={<UsersListPage />} />
               <Route path='login' element={<LoginPage />} />
             </Route>
             <Route
@@ -40,7 +40,7 @@ ReactDOM.render(
       </CookiesProvider>
     </ApolloProvider>
   </React.StrictMode>,
-  rootElement,
+  rootElement
 );
 
 // If you want to start measuring performance in your app, pass a function
