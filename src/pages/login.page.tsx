@@ -1,6 +1,5 @@
 import { useMutation } from '@apollo/client';
 import { validateEmail, validatePassword } from 'helpers/login.validations';
-import Spinner from 'components/spinner.component';
 import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import LoginMutation from 'server/mutations/login';
@@ -40,7 +39,7 @@ function LoginPage() {
         variables: { email: email, password: password },
         onCompleted: ({ login }) => {
           setCookie('token', login.token);
-          navigate('/app/content');
+          navigate("/app/content");
         },
       });
     }
@@ -50,7 +49,6 @@ function LoginPage() {
   return (
     <div className='LoginContainer'>
       <h1>Bem-vindo(a) à Taqtile!</h1>
-
       <form className='Form'>
         <div className='Input'>
           <label htmlFor='email'>E-mail</label>
@@ -65,8 +63,10 @@ function LoginPage() {
         <div className='ErrorMessage'>
           {submitted && !passwordValid ? <p>Senha inválida! (+7 caracteres e ao menos uma letra e um número)</p> : ''}
         </div>
-        {loading ? <Spinner /> : <input type='button' value='Login' className='ButtonSubmit' onClick={handleSubmit} />}
+
+        <input type='button' value='Login' className='ButtonSubmit' onClick={handleSubmit} />
       </form>
+      {loading && <p>Carregando...</p>}
       <div className='ErrorMessage'>
         <p>{error?.message}</p>
       </div>
