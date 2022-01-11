@@ -65,11 +65,7 @@ function LoginPage() {
         <ErrorMessage
           label={submitted && !passwordValid ? 'Senha inválida! (+7 caracteres e ao menos uma letra e um número)' : ''}
         />
-        {loading ? (
-          <Spinner></Spinner>
-        ) : (
-          <input type='button' value='Login' className='ButtonSubmit' onClick={handleSubmit} />
-        )}
+        {loading ? <Spinner /> : <input type='button' value='Login' className='ButtonSubmit' onClick={handleSubmit} />}
       </form>
       <ErrorMessage label={error?.message} />
     </div>
