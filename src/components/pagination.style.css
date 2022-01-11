@@ -1,0 +1,29 @@
+button + button {
+  margin-left: 1rem;
+}
+
+.PaginationContainer {
+  margin-top: 2rem;
+}
+
+button {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1rem;
+  background-color: #fff;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color .3s;
+}
+
+button:hover:not(.PaginationContainer__button--active):enabled {
+  background-color: #dfdfdf;
+}
+
+.PaginationContainer__button--active {
+  background: #000;
+  color: #fff;
+  border: none;
+}

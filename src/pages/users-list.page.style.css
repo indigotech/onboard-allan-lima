@@ -13,3 +13,10 @@ tr:nth-child(even) {
   flex-direction: column;
   align-items: center;
 }
+
+.TableContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 30rem;
+}
