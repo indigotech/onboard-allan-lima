@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import './login.page.style.css';
 import { LoginMutation } from 'server/mutations/login';
+import ErrorMessage from 'components/error-message.component';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [passwordValid, setPasswordValid] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [cookies, setCookie] = useCookies(['token']);
+  const [, setCookie] = useCookies(['token']);
   const [login, { loading, error }] = useMutation(LoginMutation);
   const navigate = useNavigate();
 
@@ -56,20 +57,21 @@ function LoginPage() {
           <label htmlFor='email'>E-mail</label>
           <input type='email' name='email' onChange={handleEmailChange} required />
         </div>
-        <div className='ErrorMessage'>{submitted && !emailValid ? <p>Email inválido!</p> : ''}</div>
-
+        <ErrorMessage label={submitted && !emailValid ? 'Email inválido!' : ''} />
         <div className='Input'>
           <label htmlFor='password'>Senha</label>
           <input type='password' name='password' onChange={handlePasswordChange} required minLength={7} />
         </div>
-        <div className='ErrorMessage'>
-          {submitted && !passwordValid ? <p>Senha inválida! (+7 caracteres e ao menos uma letra e um número)</p> : ''}
-        </div>
-        {loading ? <Spinner /> : <input type='button' value='Login' className='ButtonSubmit' onClick={handleSubmit} />}
+        <ErrorMessage
+          label={submitted && !passwordValid ? 'Senha inválida! (+7 caracteres e ao menos uma letra e um número)' : ''}
+        />
+        {loading ? (
+          <Spinner></Spinner>
+        ) : (
+          <input type='button' value='Login' className='ButtonSubmit' onClick={handleSubmit} />
+        )}
       </form>
-      <div className='ErrorMessage'>
-        <p>{error?.message}</p>
-      </div>
+      <ErrorMessage label={error?.message} />
     </div>
   );
 }
