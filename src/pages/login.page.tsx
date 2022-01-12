@@ -48,23 +48,24 @@ function LoginPage() {
     setSubmitted(true);
   };
 
+  const emailError = submitted && !emailValid ? 'Email inválido!' : '';
+  const passwordError =
+    submitted && !passwordValid ? 'Senha inválida! (+7 caracteres e ao menos uma letra e um número)' : '';
+
   return (
     <div className='LoginContainer'>
       <h1>Bem-vindo(a) à Taqtile!</h1>
-
       <form className='Form'>
         <div className='Input'>
           <label htmlFor='email'>E-mail</label>
           <input type='email' name='email' onChange={handleEmailChange} required />
         </div>
-        <ErrorMessage label={submitted && !emailValid ? 'Email inválido!' : ''} />
+        <ErrorMessage label={emailError} />
         <div className='Input'>
           <label htmlFor='password'>Senha</label>
           <input type='password' name='password' onChange={handlePasswordChange} required minLength={7} />
         </div>
-        <ErrorMessage
-          label={submitted && !passwordValid ? 'Senha inválida! (+7 caracteres e ao menos uma letra e um número)' : ''}
-        />
+        <ErrorMessage label={passwordError} />
         {loading ? <Spinner /> : <input type='button' value='Login' className='ButtonSubmit' onClick={handleSubmit} />}
       </form>
       <ErrorMessage label={error?.message} />

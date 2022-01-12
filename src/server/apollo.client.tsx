@@ -15,11 +15,10 @@ const getApolloClient = (token: string): ApolloClient<NormalizedCacheObject> => 
     };
   });
 
-  const client = new ApolloClient({
+  return new ApolloClient({
     link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
   });
-  return client;
 };
 
 export default getApolloClient;
