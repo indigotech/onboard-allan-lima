@@ -2,8 +2,6 @@ import { ApolloClient, createHttpLink, InMemoryCache, NormalizedCacheObject } fr
 import { setContext } from '@apollo/client/link/context';
 
 const getApolloClient = (token: string): ApolloClient<NormalizedCacheObject> => {
-  
-
   const httpLink = createHttpLink({
     uri: 'https://tq-template-server-sample.herokuapp.com/graphql',
   });
