@@ -5,15 +5,15 @@ import { useQuery } from '@apollo/client';
 import { UsersListQuery } from 'server/queries/users';
 import Spinner from 'components/spinner.component';
 import ErrorMessage from 'components/error-message.component';
-import Pagination from 'components/pagination.component';
+import { Pagination } from 'components/pagination.component';
 
-const LIMIT = 10;
+const USER_LIST_QUERY_LIMIT = 10;
 
 function UsersListPage() {
   const [offset, setOffset] = useState(0);
   const { loading, data, error } = useQuery(UsersListQuery, {
     variables: {
-      limit: LIMIT,
+      limit: USER_LIST_QUERY_LIMIT,
       offset: offset,
     },
   });
@@ -46,7 +46,7 @@ function UsersListPage() {
             </table>
           </div>
           <Pagination
-            limit={LIMIT}
+            limit={USER_LIST_QUERY_LIMIT}
             total={data?.users?.count}
             offset={offset}
             setOffset={setOffset}

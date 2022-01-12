@@ -12,7 +12,7 @@ interface PaginationProps {
   setOffset: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Pagination = (props: PaginationProps) => {
+export const Pagination = (props: PaginationProps) => {
   const limit = props.limit > 0 ? props.limit : 1;
   const total = props.total;
   const offset = props.offset;
@@ -55,11 +55,3 @@ const Pagination = (props: PaginationProps) => {
     </div>
   );
 };
-
-Pagination.defaultProps = {
-  limit: 10,
-  total: 0,
-  offset: 0,
-};
-
-export default Pagination;
