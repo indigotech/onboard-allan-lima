@@ -1,29 +1,129 @@
+import { useMutation } from '@apollo/client';
+import ErrorMessage from 'components/error-message.component';
+import { FormInput, FormInputProps } from 'components/form-input.component';
+import Spinner from 'components/spinner.component';
+import { REGEX_PASSWORD, REGEX_PHONE_NUMBER } from 'helpers/regex';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AddUserMutation } from 'server/mutations/user';
+import { UserInput } from 'types';
 import './add-user.page.style.css';
 
 export function AddUserPage() {
+  const navigate = useNavigate();
+  const [addUser, { loading, error }] = useMutation(AddUserMutation);
+  const [values, setValues] = useState<UserInput>({
+    name: '',
+    email: '',
+    phone: '',
+    birthDate: '',
+    password: '',
+    role: 'user',
+  });
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValues({ ...values, [event.target.name]: event.target.value });
+  };
+
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setValues({ ...values, role: event.target.value });
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    addUser({
+      variables: { data: { ...values } },
+      onCompleted: () => {
+        navigate('/app/users/list');
+      },
+    });
+  };
+
+  const inputs: FormInputProps[] = [
+    {
+      name: 'name',
+      type: 'text',
+      placeholder: 'Nome',
+      errorMessage: 'O nome é inválido.',
+      label: 'Nome',
+      required: true,
+    },
+    {
+      name: 'email',
+      type: 'email',
+      placeholder: 'E-mail',
+      errorMessage: 'O e-mail é inválido.',
+      label: 'E-mail',
+      required: true,
+    },
+    {
+      name: 'phone',
+      type: 'text',
+      placeholder: 'Telefone',
+      errorMessage: 'O telefone é inválido. (+99(99)9999x-9999 sem espaços)',
+      label: 'Telefone',
+      required: true,
+      pattern: REGEX_PHONE_NUMBER,
+    },
+    {
+      name: 'birthDate',
+      type: 'date',
+      placeholder: 'Data de Nascimento',
+      errorMessage: 'A data de nascimento é inválida!',
+      label: 'Data de Nascimento',
+      required: true,
+    },
+    {
+      name: 'password',
+      type: 'password',
+      placeholder: 'Senha',
+      errorMessage: 'Senha inválida. (+7 caracteres e ao menos uma letra e um número)',
+      label: 'Senha',
+      required: true,
+      pattern: REGEX_PASSWORD,
+    },
+    {
+      name: 'confirmPassword',
+      type: 'password',
+      placeholder: 'Confirmar Senha',
+      errorMessage: 'As senhas não conferem.',
+      label: 'Confirmar Senha',
+      required: true,
+      pattern: values.password,
+    },
+  ];
+
   return (
-    <div className='AddUserPageContainer'>
+    <div className='AddUserPage'>
       <h1>Adicionar Usuário</h1>
-      <form className='FormAddUser'>
-        <label htmlFor='name'>Nome</label>
-        <input type='text' name='name' />
-        <label htmlFor='email'>E-mail</label>
-        <input type='email' name='email' />
-        <label htmlFor='phone'>Telefone</label>
-        <input type='text' name='phone' />
-        <label htmlFor='birthDate'>Data de Nascimento</label>
-        <input type='text' name='birthDate' />
-        <label htmlFor='password'>Senha</label>
-        <input type='password' name='password' />
-        <label htmlFor='phone'>Telefone</label>
-        <input type='text' name='phone' />
-        <label htmlFor='role'>Privilégio</label>
-        <select name='role'>
-          <option value='admin'>Administrador</option>
-          <option value='user'>Usuário</option>
-        </select>
-      </form>
-      <button className='Button' type='button'>Salvar</button>
+
+      {loading ? (
+        <Spinner />
+      ) : (
+        <form className='AddUserPage__form' onSubmit={handleSubmit}>
+          {inputs.map((input) => (
+            <FormInput
+              key={input.name}
+              {...input}
+              value={values[input.name as keyof UserInput]}
+              onInputChange={input.name != 'confirmPassword' ? handleInputChange : undefined}
+            />
+          ))}
+          <div className='Select'>
+            <label className='Select__label' htmlFor='role'>
+              Acesso
+            </label>
+            <select className='Select__select' name='role' onChange={handleSelectChange}>
+              <option value='admin'>Administrador</option>
+              <option value='user'>Usuário</option>
+            </select>
+          </div>
+          <button className='Button' type='submit'>
+            Salvar
+          </button>
+          <ErrorMessage label={error?.message} />
+        </form>
+      )}
     </div>
   );
 }
