@@ -6,10 +6,12 @@ import { UsersListQuery } from 'server/queries/users';
 import Spinner from 'components/spinner.component';
 import ErrorMessage from 'components/error-message.component';
 import { Pagination } from 'components/pagination.component';
+import { useNavigate } from 'react-router-dom';
 
 const USER_LIST_QUERY_LIMIT = 10;
 
 function UsersListPage() {
+  const navigate = useNavigate();
   const [offset, setOffset] = useState(0);
   const { loading, data, error } = useQuery(UsersListQuery, {
     variables: {
@@ -21,6 +23,15 @@ function UsersListPage() {
   return (
     <div className='UsersListContainer'>
       <h1>Listagem de Usuários</h1>
+      <button
+        className='ButtonAddUser'
+        type='button'
+        onClick={() => {
+          navigate('/app/users/add');
+        }}
+      >
+        Adicionar
+      </button>
       {loading ? (
         <Spinner />
       ) : (

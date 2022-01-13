@@ -6,7 +6,7 @@ button + button {
   margin-top: 2rem;
 }
 
-button {
+.ButtonPage {
   width: 2.5rem;
   height: 2.5rem;
   font-size: 1rem;
@@ -18,12 +18,12 @@ button {
   transition: background-color .3s;
 }
 
-button:hover:not(.PaginationContainer__button--active):enabled {
+.ButtonPage:hover:not(.PaginationContainer__button--active):enabled {
   background-color: #dfdfdf;
 }
 
-.PaginationContainer__button--active {
-  background: #000;
+.ButtonPage--active {
+  background-color: #000;
   color: #fff;
   border: none;
 }
