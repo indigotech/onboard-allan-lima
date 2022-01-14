@@ -23,11 +23,3 @@
   flex-direction: column;
   align-items: center;
 }
-
-.ErrorMessage {
-    height: 40px;
-}
-
-.ErrorMessage p {
-    color: red;
-}
