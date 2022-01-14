@@ -8,6 +8,7 @@ import { CookiesProvider } from 'react-cookie';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import UsersListPage from './pages/users-list.page';
 import { AddUserPage } from 'pages/add-user.page';
+import { UserDetailsPage } from 'pages/user-details.page';
 
 const rootElement = document.getElementById('root');
 
@@ -16,15 +17,17 @@ ReactDOM.render(
     <CookiesProvider>
       <BrowserRouter>
         <Routes>
-          <Route path='app' element={<App />}>
+          <Route path='/' element={<App />}>
+            <Route path='' element={<Navigate to='/login' />} />
             <Route path='users'>
               <Route path='' element={<UsersListPage />} />
               <Route path='add' element={<AddUserPage />} />
-              <Route path='*' element={<Navigate to='/app/users' />} />
+              <Route path='details/:userId' element={<UserDetailsPage />} />
+              <Route path='*' element={<Navigate to='/users' />} />
             </Route>
             <Route path='login' element={<LoginPage />} />
+            <Route path='*' element={<Navigate to='/login' />} />
           </Route>
-          <Route path='*' element={<Navigate to='/app/login' />} />
         </Routes>
       </BrowserRouter>
     </CookiesProvider>

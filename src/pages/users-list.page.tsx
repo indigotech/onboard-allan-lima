@@ -6,7 +6,7 @@ import { UsersListQuery } from 'server/queries/users';
 import Spinner from 'components/spinner.component';
 import ErrorMessage from 'components/error-message.component';
 import { Pagination } from 'components/pagination.component';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const USER_LIST_QUERY_LIMIT = 10;
 
@@ -42,7 +42,14 @@ function UsersListPage() {
                 {data?.users?.nodes?.map((user: User) => {
                   return (
                     <tr key={user.id}>
-                      <td>{user.name}</td>
+                      <td>
+                        <Link
+                          to={`/users/details/${user.id}`}
+                          key={user.id}
+                        >
+                          {user.name}
+                        </Link>
+                      </td>
                       <td>{user.email}</td>
                     </tr>
                   );

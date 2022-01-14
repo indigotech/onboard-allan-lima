@@ -1,0 +1,11 @@
+.Detail {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.Detail__Field {
+  margin-left: 20px;
+  font-size: 14px;
+  color: rgb(63, 63, 63);
+  font-weight: normal;
+}

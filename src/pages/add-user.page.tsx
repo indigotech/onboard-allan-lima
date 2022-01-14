@@ -34,7 +34,7 @@ export function AddUserPage() {
     addUser({
       variables: { data: { ...values } },
       onCompleted: () => {
-        navigate('/app/users/list');
+        navigate('/users/list');
       },
     });
   };
