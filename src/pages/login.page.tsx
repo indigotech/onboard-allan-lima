@@ -57,10 +57,6 @@ function LoginPage() {
     });
   };
 
-  const emailError = submitted && !emailValid ? 'Email inválido!' : '';
-  const passwordError =
-    submitted && !passwordValid ? 'Senha inválida! (+7 caracteres e ao menos uma letra e um número)' : '';
-
   return (
     <LoginPageStyled>
       <H1 text='Bem-vindo(a) à Taqtile!' />
