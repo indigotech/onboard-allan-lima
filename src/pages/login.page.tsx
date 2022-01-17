@@ -7,9 +7,9 @@ import { REGEX_PASSWORD } from 'helpers/regex';
 import { FormInput, FormInputProps } from 'components/atm.form-input/atm.form-input.component';
 import { UserLogin } from 'types';
 import { H1 } from 'components/atm.h1/h1.component';
-import { FormStyled, LoginStyled } from './login.page.styled';
 import { Button } from 'components/atm.button/button.component';
 import { ErrorMessage } from 'components/atm.error-message/error-message.component';
+import { LoginPageStyled } from './login.page.styled';
 
 function LoginPage() {
   const [, setCookie] = useCookies(['token']);
@@ -61,10 +61,10 @@ function LoginPage() {
     submitted && !passwordValid ? 'Senha inválida! (+7 caracteres e ao menos uma letra e um número)' : '';
 
   return (
-    <LoginStyled>
+    <LoginPageStyled>
       <H1 text='Bem-vindo(a) à Taqtile!' />
 
-      <FormStyled onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         {inputs.map((input) => (
           <FormInput
             key={input.name}
@@ -74,9 +74,9 @@ function LoginPage() {
           />
         ))}
         <Button label='Login' type='submit' loading={loading} />
-      </FormStyled>
+      </form>
       <ErrorMessage label={error?.message} />
-    </LoginStyled>
+    </LoginPageStyled>
   );
 }
 

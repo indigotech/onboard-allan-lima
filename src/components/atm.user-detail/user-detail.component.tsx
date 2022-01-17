@@ -1,4 +1,4 @@
-import './user-detail.style.css';
+import { UserDetailStyled } from './user-detail.component.styled';
 
 interface UserDetailProps {
   label: string;
@@ -7,9 +7,9 @@ interface UserDetailProps {
 
 export function UserDetail(props: UserDetailProps) {
   return (
-    <p className='Detail'>
+    <UserDetailStyled>
       {props.label}
-      <span className='Detail__Field'>{props.field}</span>
-    </p>
+      <span>{props.field}</span>
+    </UserDetailStyled>
   );
 }

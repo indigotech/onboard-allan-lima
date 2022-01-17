@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
-export const LoginStyled = styled.div`
+export const LoginPageStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-export const FormStyled = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;

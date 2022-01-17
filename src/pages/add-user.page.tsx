@@ -1,13 +1,15 @@
 import { useMutation } from '@apollo/client';
+import { Button } from 'components/atm.button/button.component';
 import { ErrorMessage } from 'components/atm.error-message/error-message.component';
 import { FormInput, FormInputProps } from 'components/atm.form-input/atm.form-input.component';
+import { H1 } from 'components/atm.h1/h1.component';
 import { Spinner } from 'components/atm.spinner/spinner.component';
 import { REGEX_PASSWORD } from 'helpers/regex';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AddUserMutation } from 'server/mutations/user';
 import { UserInput } from 'types';
-import './add-user.page.style.css';
+import { AddUserPageStyled } from './add-user.page.styled';
 
 export function AddUserPage() {
   const navigate = useNavigate();
@@ -94,13 +96,12 @@ export function AddUserPage() {
   ];
 
   return (
-    <div className='AddUserPage'>
-      <h1>Adicionar Usuário</h1>
-
+    <AddUserPageStyled>
+      <H1 text='Adicionar Usuário' />
       {loading ? (
         <Spinner size='large' />
       ) : (
-        <form className='AddUserPage__form' onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           {inputs.map((input) => (
             <FormInput
               key={input.name}
@@ -110,20 +111,16 @@ export function AddUserPage() {
             />
           ))}
           <div className='Select'>
-            <label className='Select__label' htmlFor='role'>
-              Acesso
-            </label>
-            <select className='Select__select' name='role' onChange={handleSelectChange}>
-              <option value={'admin'} label='Administrador'/>
-              <option value={'user'} label='Usuário'/>
+            <label htmlFor='role'>Acesso</label>
+            <select name='role' onChange={handleSelectChange}>
+              <option value='admin'>Administrador</option>
+              <option value='user'>Usuário</option>
             </select>
           </div>
-          <button className='Button' type='submit'>
-            Salvar
-          </button>
+          <Button label='Salvar' type='submit' />
           <ErrorMessage label={error?.message} />
         </form>
       )}
-    </div>
+    </AddUserPageStyled>
   );
 }
