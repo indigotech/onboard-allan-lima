@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 import { FormInput, FormInputProps } from 'components/atm.form-input/atm.form-input.component';
 import { Spinner } from 'components/atm.spinner/spinner.component';
 import ErrorMessage from 'components/error-message.component';
-import { REGEX_PASSWORD, REGEX_PHONE_NUMBER } from 'helpers/regex';
+import { REGEX_PASSWORD } from 'helpers/regex';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AddUserMutation } from 'server/mutations/user';
@@ -63,7 +63,7 @@ export function AddUserPage() {
       errorMessage: 'O telefone é inválido. (+99(99)9999x-9999 sem espaços)',
       label: 'Telefone',
       required: true,
-      pattern: REGEX_PHONE_NUMBER,
+      minLength: 7,
     },
     {
       name: 'birthDate',

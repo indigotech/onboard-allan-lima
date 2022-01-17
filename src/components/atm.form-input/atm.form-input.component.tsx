@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { FormInputContainerStyled, FormInputErrorStyled, FormInputLabelStyled, FormInputStyled } from './atm.form-input.styled';
+import {
+  FormInputContainerStyled,
+  FormInputErrorStyled,
+  FormInputLabelStyled,
+  FormInputStyled,
+} from './atm.form-input.styled';
 
 export interface FormInputProps {
   name?: string;
@@ -11,38 +16,31 @@ export interface FormInputProps {
   errorMessage?: string;
   required?: boolean;
   pattern?: string;
-  focused?: string;
+  minLength?: number;
+  maxLength?: number;
 }
 
 export function FormInput(props: FormInputProps) {
-  const { label, errorMessage, ...others } = props;
+  const { label, errorMessage, onChange, ...others } = props;
   const [focused, setFocused] = useState(false);
-  const [valid, setValid] = useState(true);
+  const [valid, setValid] = useState(false);
   const errorVisible = !valid && focused;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValid(event.target.checkValidity());
-    props.onChange ? props.onChange(event) : '';
-  }
-
-  const handleBlur = () => {
-    setFocused(true);
+    onChange ? onChange(event) : '';
   };
 
-  const handleFocus = () => {
-    return props.name === 'confirmPassword' && setFocused(true);
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>) => {
+    setValid(event.target.checkValidity());
+    setFocused(true);
   };
 
   return (
     <FormInputContainerStyled>
       <FormInputLabelStyled htmlFor={props.name}>{label}</FormInputLabelStyled>
-      <FormInputStyled
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-        focused={focused.toString()}
-        {...others}
-      ></FormInputStyled>
-      <FormInputErrorStyled visible={valid}>{errorMessage}</FormInputErrorStyled>
+      <FormInputStyled onBlur={handleBlur} focused={focused} onChange={handleChange} {...others}></FormInputStyled>
+      <FormInputErrorStyled visible={errorVisible}>{errorMessage}</FormInputErrorStyled>
     </FormInputContainerStyled>
   );
 }

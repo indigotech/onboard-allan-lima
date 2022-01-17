@@ -7,17 +7,14 @@ export const FormInputContainerStyled = styled.div`
   width: 280px;
 `;
 
-export const FormInputStyled = styled.input`
+export const FormInputStyled = styled.input<{ focused: boolean }>`
   padding: 10px;
   margin: 10px 0px;
   border-radius: 5px;
   border: 1px solid gray;
   width: 100%;
-  &[focused='true']:invalid {
-    border: 1px solid red;
-  }
-  &[focused='true']:invalid ~ .FormInputError {
-    display: inline-block;
+  &:invalid {
+    border:${props => props.focused ? '1px solid red' : ''};
   }
 `;
 
@@ -30,5 +27,5 @@ export const FormInputErrorStyled = styled.span<{ visible: boolean }>`
   font-size: 12px;
   margin-bottom: 10px;
   color: red;
-  display: none;
+  display: ${props => props.visible ? 'block' : 'none'};
 `;
