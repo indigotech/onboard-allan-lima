@@ -31,4 +31,8 @@ export const AddUserPageStyled = styled.div`
       width: 100%;
     }
   }
+
+  button {
+    margin-top: 30px;
+  }
 `;

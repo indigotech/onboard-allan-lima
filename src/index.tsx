@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { UsersListPage } from './pages/users-list.page';
 import { AddUserPage } from 'pages/add-user.page';
 import { UserDetailsPage } from 'pages/user-details.page';
+import './index.css';
 
 const rootElement = document.getElementById('root');
 

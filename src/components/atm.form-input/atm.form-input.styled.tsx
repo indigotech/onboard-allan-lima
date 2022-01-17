@@ -9,7 +9,7 @@ export const FormInputContainerStyled = styled.div`
 
 export const FormInputStyled = styled.input<{ focused: boolean }>`
   padding: 10px;
-  margin: 10px 0px;
+  margin-bottom: 15px;
   border-radius: 5px;
   border: 1px solid gray;
   width: 100%;
@@ -20,12 +20,15 @@ export const FormInputStyled = styled.input<{ focused: boolean }>`
 
 export const FormInputLabelStyled = styled.label`
   font-size: 12px;
-  color: rgb(63, 63, 63);
+  font-weight: normal;
+  color: gray;
+  margin-bottom: 12px;
 `;
 
 export const FormInputErrorStyled = styled.span<{ visible: boolean }>`
   font-size: 12px;
-  margin-bottom: 10px;
+  font-weight: normal;
+  margin-bottom: 15px;
   color: red;
   display: ${props => props.visible ? 'block' : 'none'};
 `;
