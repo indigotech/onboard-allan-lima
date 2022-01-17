@@ -29,10 +29,10 @@ export const Pagination = (props: PaginationProps) => {
 
   return (
     <div className='PaginationContainer'>
-      <button onClick={() => handlePageChange(1)} disabled={currentPage === 1}>
+      <button className='ButtonPage' onClick={() => handlePageChange(1)} disabled={currentPage === 1}>
         <span>&lt;&lt;</span>
       </button>
-      <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+      <button className='ButtonPage' onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
         <span>&lt;</span>
       </button>
       {Array.from({ length: Math.min(MAX_PAGES, pages) })
@@ -40,16 +40,16 @@ export const Pagination = (props: PaginationProps) => {
         .map((page) => (
           <button
             key={page}
-            className={page === currentPage ? 'PaginationContainer__button--active' : ''}
+            className={`ButtonPage ${page === currentPage ? 'ButtonPage--active' : ''}`}
             onClick={() => handlePageChange(page)}
           >
             {page}
           </button>
         ))}
-      <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === pages}>
+      <button className='ButtonPage' onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === pages}>
         <span>&gt;</span>
       </button>
-      <button onClick={() => handlePageChange(pages)} disabled={currentPage === pages}>
+      <button className='ButtonPage' onClick={() => handlePageChange(pages)} disabled={currentPage === pages}>
         <span>&gt;&gt;</span>
       </button>
     </div>

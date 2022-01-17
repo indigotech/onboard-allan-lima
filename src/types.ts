@@ -3,3 +3,12 @@ export interface User {
   name: string;
   email: string;
 }
+
+export interface UserInput {
+  name: string;
+  email: string;
+  phone: string;
+  birthDate: string;
+  password: string;
+  role?: 'user' | 'admin';
+}
