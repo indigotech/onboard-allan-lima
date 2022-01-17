@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { FormInput, FormInputProps } from 'components/atm.form-input/atm.form-input.component';
-import { UserLogin } from 'types';
 import { H1 } from 'components/atm.h1/h1.component';
 import { Button } from 'components/atm.button/button.component';
 import { ErrorMessage } from 'components/atm.error-message/error-message.component';
 import { LoginPageStyled } from './login.page.styled';
 import { LoginMutation } from 'data/graphql/mutations/login.mutation';
 import { REGEX_PASSWORD } from 'helpers/regex';
+import { getUsersListRoute } from 'routes';
+import { UserLogin } from 'types';
 
 function LoginPage() {
   const [, setCookie] = useCookies(['token']);
@@ -51,7 +52,7 @@ function LoginPage() {
       variables: { email: values.email, password: values.password },
       onCompleted: ({ login }) => {
         setCookie('token', login.token);
-        navigate('/users');
+        navigate(getUsersListRoute());
       },
     });
   };
@@ -63,7 +64,6 @@ function LoginPage() {
   return (
     <LoginPageStyled>
       <H1 text='Bem-vindo(a) à Taqtile!' />
-
       <form onSubmit={handleSubmit}>
         {inputs.map((input) => (
           <FormInput
