@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const UserDetailStyled = styled.p`
-  ont-size: 18px;
+  font-size: 18px;
   font-weight: bold;
 
   span {

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { User } from 'types';
 import { useQuery } from '@apollo/client';
 import { UsersListQuery } from 'server/queries/users';
-import { Pagination } from 'components/pagination.component';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'components/atm.button/button.component';
 import { getAddUserRoute, getUserDetailRoute } from 'routes';
@@ -10,6 +9,7 @@ import { H1 } from 'components/atm.h1/h1.component';
 import { Spinner } from 'components/atm.spinner/spinner.component';
 import { ErrorMessage } from 'components/atm.error-message/error-message.component';
 import { UsersListPageStyled, UsersListTableStyled } from './users-list.page.styled';
+import { Pagination } from 'components/mol.pagination/pagination.component';
 
 const USER_LIST_QUERY_LIMIT = 10;
 
