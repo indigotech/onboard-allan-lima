@@ -98,7 +98,7 @@ export function AddUserPage() {
       <h1>Adicionar Usuário</h1>
 
       {loading ? (
-        <Spinner />
+        <Spinner size='large' />
       ) : (
         <form className='AddUserPage__form' onSubmit={handleSubmit}>
           {inputs.map((input) => (

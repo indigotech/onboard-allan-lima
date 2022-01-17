@@ -7,4 +7,5 @@ export const ButtonStyled = styled.button`
   color: white;
   border-radius: 10px;
   min-height: 44px;
+  min-width: 100px;
 `;

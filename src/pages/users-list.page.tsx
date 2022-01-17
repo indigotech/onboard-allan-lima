@@ -45,7 +45,7 @@ function UsersListPage() {
       <H1 text='Listagem de Usuários' />
       <Button label='Adicionar' type='button' onClick={handleAddButtonClick} />
       {loading ? (
-        <Spinner />
+        <Spinner size='large' />
       ) : (
         <div>
           <div className='TableContainer'>

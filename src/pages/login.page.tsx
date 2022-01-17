@@ -1,51 +1,59 @@
 import { useMutation } from '@apollo/client';
-import { validateEmail, validatePassword } from 'helpers/login.validations';
 import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import './login.page.style.css';
 import { LoginMutation } from 'server/mutations/login';
 import ErrorMessage from 'components/error-message.component';
-import { Spinner } from 'components/atm.spinner/spinner.component';
+import { REGEX_PASSWORD } from 'helpers/regex';
+import { FormInput, FormInputProps } from 'components/atm.form-input/atm.form-input.component';
+import { UserLogin } from 'types';
+import { H1 } from 'components/atm.h1/h1.component';
+import { FormStyled, LoginStyled } from './login.page.styled';
+import { Button } from 'components/atm.button/button.component';
 
 function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [emailValid, setEmailValid] = useState(false);
-  const [password, setPassword] = useState('');
-  const [passwordValid, setPasswordValid] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [, setCookie] = useCookies(['token']);
   const [login, { loading, error }] = useMutation(LoginMutation);
   const navigate = useNavigate();
+  const [values, setValues] = useState<UserLogin>({
+    email: '',
+    password: '',
+  });
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const email: string = event.target.value;
-    setEmail(email);
+  const inputs: FormInputProps[] = [
+    {
+      name: 'email',
+      type: 'email',
+      placeholder: 'E-mail',
+      errorMessage: 'O e-mail é inválido.',
+      label: 'E-mail',
+      required: true,
+    },
+    {
+      name: 'password',
+      type: 'password',
+      placeholder: 'Senha',
+      errorMessage: 'Senha inválida! (+7 caracteres e ao menos uma letra e um número)',
+      label: 'Senha',
+      required: true,
+      minLength: 7,
+      pattern: REGEX_PASSWORD,
+    },
+  ];
 
-    const emailValid: boolean = validateEmail(event.target);
-    setEmailValid(emailValid);
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValues({ ...values, [event.target.name]: event.target.value });
   };
 
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const password: string = event.target.value;
-    setPassword(password);
-
-    const passwordValid: boolean = validatePassword(event.target);
-    setPasswordValid(passwordValid);
-  };
-
-  const handleSubmit = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (emailValid && passwordValid) {
-      login({
-        variables: { email: email, password: password },
-        onCompleted: ({ login }) => {
-          setCookie('token', login.token);
-          navigate('/users');
-        },
-      });
-    }
-    setSubmitted(true);
+    login({
+      variables: { email: values.email, password: values.password },
+      onCompleted: ({ login }) => {
+        setCookie('token', login.token);
+        navigate('/users');
+      },
+    });
   };
 
   const emailError = submitted && !emailValid ? 'Email inválido!' : '';
@@ -53,23 +61,22 @@ function LoginPage() {
     submitted && !passwordValid ? 'Senha inválida! (+7 caracteres e ao menos uma letra e um número)' : '';
 
   return (
-    <div className='LoginContainer'>
-      <h1>Bem-vindo(a) à Taqtile!</h1>
-      <form className='Form'>
-        <div className='Input'>
-          <label htmlFor='email'>E-mail</label>
-          <input type='email' name='email' onChange={handleEmailChange} required />
-        </div>
-        <ErrorMessage label={emailError} />
-        <div className='Input'>
-          <label htmlFor='password'>Senha</label>
-          <input type='password' name='password' onChange={handlePasswordChange} required minLength={7} />
-        </div>
-        <ErrorMessage label={passwordError} />
-        {loading ? <Spinner /> : <input type='button' value='Login' className='ButtonSubmit' onClick={handleSubmit} />}
-      </form>
+    <LoginStyled>
+      <H1 text='Bem-vindo(a) à Taqtile!' />
+
+      <FormStyled onSubmit={handleSubmit}>
+        {inputs.map((input) => (
+          <FormInput
+            key={input.name}
+            {...input}
+            value={values[input.name as keyof UserLogin]}
+            onChange={handleInputChange}
+          />
+        ))}
+        <Button label='Login' type='submit' loading={loading} />
+      </FormStyled>
       <ErrorMessage label={error?.message} />
-    </div>
+    </LoginStyled>
   );
 }
 

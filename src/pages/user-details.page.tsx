@@ -18,7 +18,7 @@ export function UserDetailsPage() {
   return (
     <div className='UserDetailsPage'>
       {loading ? (
-        <Spinner />
+        <Spinner size='large' />
       ) : (
         <>
           <h1>Detalhes {data?.user?.name}</h1>
