@@ -10,5 +10,5 @@ export interface UserInput {
   phone: string;
   birthDate: string;
   password: string;
-  role: string;
+  role?: 'user' | 'admin';
 }

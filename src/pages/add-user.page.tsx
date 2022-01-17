@@ -26,7 +26,7 @@ export function AddUserPage() {
   };
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setValues({ ...values, role: event.target.value });
+    setValues({ ...values, role: event.target.value as 'user' | 'admin' });
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -114,8 +114,8 @@ export function AddUserPage() {
               Acesso
             </label>
             <select className='Select__select' name='role' onChange={handleSelectChange}>
-              <option value='admin'>Administrador</option>
-              <option value='user'>Usuário</option>
+              <option value={'admin'} label='Administrador'/>
+              <option value={'user'} label='Usuário'/>
             </select>
           </div>
           <button className='Button' type='submit'>

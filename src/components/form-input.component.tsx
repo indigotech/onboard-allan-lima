@@ -28,7 +28,9 @@ export function FormInput(props: FormInputProps) {
 
   return (
     <div className='FormInput'>
-      <label className='FormInput__label' htmlFor={inputProps.name}>{label}</label>
+      <label className='FormInput__label' htmlFor={inputProps.name}>
+        {label}
+      </label>
       <input
         className='FormInput__input'
         onChange={onInputChange}
@@ -36,7 +38,7 @@ export function FormInput(props: FormInputProps) {
         onFocus={handleFocus}
         focused={focused.toString()}
         {...inputProps}
-      ></input>
+      />
       <span className='FormInputError'>{errorMessage}</span>
     </div>
   );

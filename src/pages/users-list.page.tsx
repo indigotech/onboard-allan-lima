@@ -23,13 +23,7 @@ function UsersListPage() {
   return (
     <div className='UsersListContainer'>
       <h1>Listagem de Usuários</h1>
-      <button
-        className='ButtonAddUser'
-        type='button'
-        onClick={() => {
-          navigate('/app/users/add');
-        }}
-      >
+      <button className='ButtonAddUser' type='button' onClick={() => navigate('/app/users/add')}>
         Adicionar
       </button>
       {loading ? (
