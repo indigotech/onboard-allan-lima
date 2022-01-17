@@ -1,12 +1,12 @@
 import { useMutation } from '@apollo/client';
 import { validateEmail, validatePassword } from 'helpers/login.validations';
-import Spinner from 'components/spinner.component';
 import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import './login.page.style.css';
 import { LoginMutation } from 'server/mutations/login';
 import ErrorMessage from 'components/error-message.component';
+import { Spinner } from 'components/atm.spinner/spinner.component';
 
 function LoginPage() {
   const [email, setEmail] = useState('');

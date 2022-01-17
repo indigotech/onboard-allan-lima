@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
+import { FormInput, FormInputProps } from 'components/atm.form-input/atm.form-input.component';
+import { Spinner } from 'components/atm.spinner/spinner.component';
 import ErrorMessage from 'components/error-message.component';
-import { FormInput, FormInputProps } from 'components/form-input.component';
-import Spinner from 'components/spinner.component';
 import { REGEX_PASSWORD, REGEX_PHONE_NUMBER } from 'helpers/regex';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -106,7 +106,7 @@ export function AddUserPage() {
               key={input.name}
               {...input}
               value={values[input.name as keyof UserInput]}
-              onInputChange={input.name != 'confirmPassword' ? handleInputChange : undefined}
+              onChange={input.name != 'confirmPassword' ? handleInputChange : undefined}
             />
           ))}
           <div className='Select'>
