@@ -4,13 +4,13 @@ export interface UserLogin {
 }
 
 export interface User {
-  id: string;
+  id?: string;
   name: string;
   email: string;
   phone?: string;
   birthDate?: string;
   password?: string;
-  role?: string;
+  role?: 'user' | 'admin';
 }
 
 export interface UserInput {

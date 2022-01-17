@@ -1,10 +1,5 @@
 import { useState } from 'react';
-import {
-  FormInputContainerStyled,
-  FormInputErrorStyled,
-  FormInputLabelStyled,
-  FormInputStyled,
-} from './atm.form-input.styled';
+import { FormInputErrorStyled, FormInputStyled } from './atm.form-input.styled';
 
 export interface FormInputProps {
   name?: string;
@@ -37,10 +32,10 @@ export function FormInput(props: FormInputProps) {
   };
 
   return (
-    <FormInputContainerStyled>
-      <FormInputLabelStyled htmlFor={props.name}>{label}</FormInputLabelStyled>
-      <FormInputStyled onBlur={handleBlur} focused={focused} onChange={handleChange} {...others}></FormInputStyled>
+    <FormInputStyled focused={focused}>
+      <label htmlFor={props.name}>{label}</label>
+      <input onBlur={handleBlur} onChange={handleChange} {...others} />
       <FormInputErrorStyled visible={errorVisible}>{errorMessage}</FormInputErrorStyled>
-    </FormInputContainerStyled>
+    </FormInputStyled>
   );
 }

@@ -23,15 +23,13 @@ export function UsersListPage() {
     },
   });
 
-  const handleAddButtonClick = () => {
-    navigate(getAddUserRoute());
-  };
+  const handleAddButtonClick = () => navigate(getAddUserRoute());
 
   const getUsersLines = (users?: User[]) => {
     return users?.map((user: User) => (
       <tr key={user.id}>
         <td>
-          <Link to={getUserDetailRoute(user.id)} key={user.id}>
+          <Link to={getUserDetailRoute(user.id ?? '')} key={user.id}>
             {user.name}
           </Link>
         </td>

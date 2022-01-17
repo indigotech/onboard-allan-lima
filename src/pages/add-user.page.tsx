@@ -8,13 +8,14 @@ import { AddUserMutation } from 'data/graphql/mutations/add-user.mutation';
 import { REGEX_PASSWORD } from 'helpers/regex';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserInput } from 'types';
+import { getUsersListRoute } from 'routes';
+import { User } from 'types';
 import { AddUserPageStyled } from './add-user.page.styled';
 
 export function AddUserPage() {
   const navigate = useNavigate();
   const [addUser, { loading, error }] = useMutation(AddUserMutation);
-  const [values, setValues] = useState<UserInput>({
+  const [values, setValues] = useState<User>({
     name: '',
     email: '',
     phone: '',
@@ -36,7 +37,7 @@ export function AddUserPage() {
     addUser({
       variables: { data: { ...values } },
       onCompleted: () => {
-        navigate('/users/list');
+        navigate(getUsersListRoute());
       },
     });
   };
@@ -106,7 +107,7 @@ export function AddUserPage() {
             <FormInput
               key={input.name}
               {...input}
-              value={values[input.name as keyof UserInput]}
+              value={values[input.name as keyof User]}
               onChange={input.name != 'confirmPassword' ? handleInputChange : undefined}
             />
           ))}

@@ -2,7 +2,6 @@ import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import { REGEX_PASSWORD } from 'helpers/regex';
 import { FormInput, FormInputProps } from 'components/atm.form-input/atm.form-input.component';
 import { UserLogin } from 'types';
 import { H1 } from 'components/atm.h1/h1.component';
@@ -10,6 +9,7 @@ import { Button } from 'components/atm.button/button.component';
 import { ErrorMessage } from 'components/atm.error-message/error-message.component';
 import { LoginPageStyled } from './login.page.styled';
 import { LoginMutation } from 'data/graphql/mutations/login.mutation';
+import { REGEX_PASSWORD } from 'helpers/regex';
 
 function LoginPage() {
   const [, setCookie] = useCookies(['token']);
