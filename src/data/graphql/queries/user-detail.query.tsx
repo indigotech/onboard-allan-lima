@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const UserDetailQuery = gql`
   query UserDetailQuery($id: ID!) {

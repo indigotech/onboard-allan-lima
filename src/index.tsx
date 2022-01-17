@@ -20,10 +20,11 @@ ReactDOM.render(
           <Route path='/' element={<App />}>
             <Route path='' element={<Navigate to='/login' />} />
             <Route path='users'>
-              <Route path='' element={<UsersListPage />} />
+              <Route path='' element={<Navigate to='/users/list' />} />
+              <Route path='list' element={<UsersListPage />} />
               <Route path='add' element={<AddUserPage />} />
               <Route path='details/:userId' element={<UserDetailsPage />} />
-              <Route path='*' element={<Navigate to='/users' />} />
+              <Route path='*' element={<Navigate to='/users/list' />} />
             </Route>
             <Route path='login' element={<LoginPage />} />
             <Route path='*' element={<Navigate to='/login' />} />

@@ -13,9 +13,6 @@ export const UsersListPageStyled = styled.div`
   tr:nth-child(even) {
     background-color: rgb(241, 241, 241);
   }
-  .spinner {
-    background-color: red;
-  }
 `;
 
 export const UsersListTableStyled = styled.div`

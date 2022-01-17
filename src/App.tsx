@@ -7,11 +7,11 @@ function App() {
   const [cookies] = useCookies(['token']);
 
   return (
-    <div>
+    <>
       <ApolloProvider client={getApolloClient(cookies.token)}>
         <Outlet />
       </ApolloProvider>
-    </div>
+    </>
   );
 }
 
