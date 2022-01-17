@@ -3,8 +3,8 @@ import { ErrorMessage } from 'components/atm.error-message/error-message.compone
 import { H1 } from 'components/atm.h1/h1.component';
 import { Spinner } from 'components/atm.spinner/spinner.component';
 import { UserDetail } from 'components/atm.user-detail/user-detail.component';
+import { UserDetailQuery } from 'data/graphql/queries/user-detail.query';
 import { useParams } from 'react-router-dom';
-import { UserDetailQuery } from 'server/queries/users';
 import { User } from 'types';
 import { UserDetailsPageStyled } from './user-details.page.styled';
 

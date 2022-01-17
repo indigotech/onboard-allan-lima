@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const UsersListQuery = gql`
   query UsersListQuery($limit: Int!, $offset: Int!) {
@@ -9,19 +9,6 @@ export const UsersListQuery = gql`
         email
       }
       count
-    }
-  }
-`;
-
-export const UserDetailQuery = gql`
-  query UserDetailQuery($id: ID!) {
-    user(id: $id) {
-      id
-      name
-      phone
-      birthDate
-      email
-      role
     }
   }
 `;

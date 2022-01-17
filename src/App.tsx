@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
-import getApolloClient from 'server/apollo.client';
+import getApolloClient from 'data/graphql/apollo.client';
 import { useCookies } from 'react-cookie';
 
 function App() {

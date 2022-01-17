@@ -4,10 +4,10 @@ import { ErrorMessage } from 'components/atm.error-message/error-message.compone
 import { FormInput, FormInputProps } from 'components/atm.form-input/atm.form-input.component';
 import { H1 } from 'components/atm.h1/h1.component';
 import { Spinner } from 'components/atm.spinner/spinner.component';
+import { AddUserMutation } from 'data/graphql/mutations/add-user.mutation';
 import { REGEX_PASSWORD } from 'helpers/regex';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AddUserMutation } from 'server/mutations/user';
 import { UserInput } from 'types';
 import { AddUserPageStyled } from './add-user.page.styled';
 
