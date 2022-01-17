@@ -6,8 +6,10 @@ interface UserDetailProps {
 }
 
 export function UserDetail(props: UserDetailProps) {
-  return (<p className='Detail'>
-  {props.label}
-  <span className='Detail__Field'>{props.field}</span>
-</p>);
+  return (
+    <p className='Detail'>
+      {props.label}
+      <span className='Detail__Field'>{props.field}</span>
+    </p>
+  );
 }

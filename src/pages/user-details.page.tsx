@@ -20,23 +20,21 @@ export function UserDetailsPage() {
       {loading ? (
         <Spinner />
       ) : (
-        <div>
+        <>
           <h1>Detalhes {data?.user?.name}</h1>
           {error ? (
             ''
           ) : (
-            <div>
-              <div className='UserDetailsPage__Details'>
-                <UserDetail label='ID' field={data?.user?.id} />
-                <UserDetail label='Nome' field={data?.user?.name} />
-                <UserDetail label='Telefone' field={data?.user?.phone} />
-                <UserDetail label='Data de Nascimento' field={birthDate} />
-                <UserDetail label='E-mail' field={data?.user?.email} />
-                <UserDetail label='Acesso' field={data?.user?.role} />
-              </div>
+            <div className='UserDetailsPage__Details'>
+              <UserDetail label='ID' field={data?.user?.id} />
+              <UserDetail label='Nome' field={data?.user?.name} />
+              <UserDetail label='Telefone' field={data?.user?.phone} />
+              <UserDetail label='Data de Nascimento' field={birthDate} />
+              <UserDetail label='E-mail' field={data?.user?.email} />
+              <UserDetail label='Acesso' field={data?.user?.role} />
             </div>
           )}
-        </div>
+        </>
       )}
       <ErrorMessage label={error?.message} />
     </div>
