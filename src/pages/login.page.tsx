@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { LoginMutation } from 'server/mutations/login';
-import ErrorMessage from 'components/error-message.component';
 import { REGEX_PASSWORD } from 'helpers/regex';
 import { FormInput, FormInputProps } from 'components/atm.form-input/atm.form-input.component';
 import { UserLogin } from 'types';
 import { H1 } from 'components/atm.h1/h1.component';
 import { FormStyled, LoginStyled } from './login.page.styled';
 import { Button } from 'components/atm.button/button.component';
+import { ErrorMessage } from 'components/atm.error-message/error-message.component';
 
 function LoginPage() {
   const [, setCookie] = useCookies(['token']);

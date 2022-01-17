@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
+import { ErrorMessage } from 'components/atm.error-message/error-message.component';
 import { Spinner } from 'components/atm.spinner/spinner.component';
-import ErrorMessage from 'components/error-message.component';
 import { UserDetail } from 'components/user-detail.component';
 import { useParams } from 'react-router-dom';
 import { UserDetailQuery } from 'server/queries/users';

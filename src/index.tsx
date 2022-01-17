@@ -5,7 +5,7 @@ import LoginPage from './pages/login.page';
 import reportWebVitals from './reportWebVitals';
 import { CookiesProvider } from 'react-cookie';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import UsersListPage from './pages/users-list.page';
+import { UsersListPage } from './pages/users-list.page';
 import { AddUserPage } from 'pages/add-user.page';
 import { UserDetailsPage } from 'pages/user-details.page';
 

@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
+import { ErrorMessage } from 'components/atm.error-message/error-message.component';
 import { FormInput, FormInputProps } from 'components/atm.form-input/atm.form-input.component';
 import { Spinner } from 'components/atm.spinner/spinner.component';
-import ErrorMessage from 'components/error-message.component';
 import { REGEX_PASSWORD } from 'helpers/regex';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
