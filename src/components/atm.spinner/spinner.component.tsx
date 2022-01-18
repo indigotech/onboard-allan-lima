@@ -1,24 +1,14 @@
 import { SpinnerContainerStyled, SpinnerStyled } from './spinner.component.styled';
 
+type SpinnerSize = 'small' | 'medium' | 'large';
 interface SpinnerProps {
-  size: 'small' | 'medium' | 'large';
+  size: SpinnerSize;
 }
 
+const spinnerSize: Record<SpinnerSize, number> = { small: 20, medium: 40, large: 50 };
+
 export function Spinner(props: SpinnerProps) {
-  let size = 20;
-  switch (props.size) {
-    case 'small':
-      size = 20;
-      break;
-    case 'medium':
-      size = 40;
-      break;
-    case 'large':
-      size = 50;
-      break;
-    default:
-      break;
-  }
+  const size = spinnerSize[props.size] ?? 20;
   return (
     <SpinnerContainerStyled>
       <SpinnerStyled size={size} />
