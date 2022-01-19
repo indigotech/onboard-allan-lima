@@ -10,7 +10,7 @@ interface ButtonProps {
 export function Button(props: ButtonProps) {
   const { label, loading, ...others } = props;
   return (
-    <ButtonStyled backgroundColor='black' fontSize={16} textColor='white' disabled={loading} {...others}>
+    <ButtonStyled disabled={loading} {...others}>
       {loading ? <Spinner size='small' /> : label}
     </ButtonStyled>
   );

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 interface ButtonStyledProps {
-  backgroundColor: string;
-  fontSize: number;
-  textColor: string;
+  backgroundColor?: string;
+  fontSize?: number;
+  textColor?: string;
 }
 
 export const ButtonStyled = styled.button<ButtonStyledProps>`
@@ -15,3 +15,9 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
   min-height: 44px;
   min-width: 100px;
 `;
+
+ButtonStyled.defaultProps = {
+  backgroundColor: 'black',
+  fontSize: 16,
+  textColor: 'white',
+};
