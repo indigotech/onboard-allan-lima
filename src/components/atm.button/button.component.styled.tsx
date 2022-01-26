@@ -1,23 +1,11 @@
 import styled from 'styled-components';
 
-interface ButtonStyledProps {
-  backgroundColor?: string;
-  fontSize?: number;
-  textColor?: string;
-}
-
-export const ButtonStyled = styled.button<ButtonStyledProps>`
+export const ButtonStyled = styled.button`
   font-weight: normal;
-  background-color: ${(props) => props.backgroundColor};
-  font-size: ${(props) => props.fontSize}px;
-  color: ${(props) => props.textColor};
+  background-color: black;
+  font-size: 16px;
+  color: white;
   border-radius: 10px;
   min-height: 44px;
   min-width: 100px;
 `;
-
-ButtonStyled.defaultProps = {
-  backgroundColor: 'black',
-  fontSize: 16,
-  textColor: 'white',
-};
