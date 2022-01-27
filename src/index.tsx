@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import LoginPage from './pages/login.page';
 import reportWebVitals from './reportWebVitals';
 import { CookiesProvider } from 'react-cookie';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import UsersListPage from './pages/users-list.page';
+import { UsersListPage } from './pages/users-list.page';
 import { AddUserPage } from 'pages/add-user.page';
 import { UserDetailsPage } from 'pages/user-details.page';
+import './index.css';
 
 const rootElement = document.getElementById('root');
 
@@ -20,10 +20,11 @@ ReactDOM.render(
           <Route path='/' element={<App />}>
             <Route path='' element={<Navigate to='/login' />} />
             <Route path='users'>
-              <Route path='' element={<UsersListPage />} />
+              <Route path='' element={<Navigate to='/users/list' />} />
+              <Route path='list' element={<UsersListPage />} />
               <Route path='add' element={<AddUserPage />} />
               <Route path='details/:userId' element={<UserDetailsPage />} />
-              <Route path='*' element={<Navigate to='/users' />} />
+              <Route path='*' element={<Navigate to='/users/list' />} />
             </Route>
             <Route path='login' element={<LoginPage />} />
             <Route path='*' element={<Navigate to='/login' />} />

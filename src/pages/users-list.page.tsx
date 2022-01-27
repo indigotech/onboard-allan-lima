@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { User } from 'types';
-import './users-list.page.style.css';
 import { useQuery } from '@apollo/client';
-import { UsersListQuery } from 'server/queries/users';
-import Spinner from 'components/spinner.component';
-import ErrorMessage from 'components/error-message.component';
-import { Pagination } from 'components/pagination.component';
 import { Link, useNavigate } from 'react-router-dom';
+import { Button } from 'components/atm.button/button.component';
+import { getAddUserRoute, getUserDetailRoute } from 'routes';
+import { H1 } from 'components/atm.h1/h1.component';
+import { Spinner } from 'components/atm.spinner/spinner.component';
+import { ErrorMessage } from 'components/atm.error-message/error-message.component';
+import { UsersListPageStyled, UsersListTableStyled } from './users-list.page.styled';
+import { Pagination } from 'components/mol.pagination/pagination.component';
+import { UsersListQuery } from 'data/graphql/queries/users-list.query';
 
 const USER_LIST_QUERY_LIMIT = 10;
 
-function UsersListPage() {
+export function UsersListPage() {
   const navigate = useNavigate();
   const [offset, setOffset] = useState(0);
   const { loading, data, error } = useQuery(UsersListQuery, {
@@ -20,55 +23,52 @@ function UsersListPage() {
     },
   });
 
+  const handleAddButtonClick = () => navigate(getAddUserRoute());
+
+  const getUsersLines = (users?: User[]) => {
+    return users?.map((user: User) => (
+      <tr key={user.id}>
+        <td>
+          <Link to={getUserDetailRoute(user.id ?? '')} key={user.id}>
+            {user.name}
+          </Link>
+        </td>
+        <td>{user.email}</td>
+      </tr>
+    ));
+  };
+
   return (
-    <div className='UsersListContainer'>
-      <h1>Listagem de Usuários</h1>
-      <button className='ButtonAddUser' type='button' onClick={() => navigate('/app/users/add')}>
-        Adicionar
-      </button>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <div>
-          <div className='TableContainer'>
-            <table>
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>E-mail</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data?.users?.nodes?.map((user: User) => {
-                  return (
-                    <tr key={user.id}>
-                      <td>
-                        <Link
-                          to={`/users/details/${user.id}`}
-                          key={user.id}
-                        >
-                          {user.name}
-                        </Link>
-                      </td>
-                      <td>{user.email}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+    <UsersListPageStyled>
+      <H1 text='Listagem de Usuários' />
+      <Button label='Adicionar' type='button' onClick={handleAddButtonClick} />
+      <UsersListTableStyled>
+        {loading ? (
+          <Spinner size='large' />
+        ) : (
+          <div>
+            <div className='TableContainer'>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                  </tr>
+                </thead>
+                <tbody>{getUsersLines(data?.users?.nodes)}</tbody>
+              </table>
+            </div>
+            <Pagination
+              limit={USER_LIST_QUERY_LIMIT}
+              total={data?.users?.count}
+              offset={offset}
+              setOffset={setOffset}
+              loading={loading}
+            />
           </div>
-          <Pagination
-            limit={USER_LIST_QUERY_LIMIT}
-            total={data?.users?.count}
-            offset={offset}
-            setOffset={setOffset}
-            loading={loading}
-          />
-        </div>
-      )}
+        )}
+      </UsersListTableStyled>
       <ErrorMessage label={error?.message} />
-    </div>
+    </UsersListPageStyled>
   );
 }
-
-export default UsersListPage;

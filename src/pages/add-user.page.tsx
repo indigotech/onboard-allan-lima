@@ -1,13 +1,15 @@
 import { useMutation } from '@apollo/client';
-import ErrorMessage from 'components/error-message.component';
-import { FormInput, FormInputProps } from 'components/form-input.component';
-import Spinner from 'components/spinner.component';
+import { Button } from 'components/atm.button/button.component';
+import { ErrorMessage } from 'components/atm.error-message/error-message.component';
+import { FormInput, FormInputProps } from 'components/atm.form-input/atm.form-input.component';
+import { H1 } from 'components/atm.h1/h1.component';
+import { AddUserMutation } from 'data/graphql/mutations/add-user.mutation';
 import { REGEX_PASSWORD, REGEX_PHONE_NUMBER } from 'helpers/regex';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AddUserMutation } from 'server/mutations/user';
+import { getUsersListRoute } from 'routes';
 import { UserInput } from 'types';
-import './add-user.page.style.css';
+import { AddUserPageStyled } from './add-user.page.styled';
 
 export function AddUserPage() {
   const navigate = useNavigate();
@@ -34,7 +36,7 @@ export function AddUserPage() {
     addUser({
       variables: { data: { ...values } },
       onCompleted: () => {
-        navigate('/users/list');
+        navigate(getUsersListRoute());
       },
     });
   };
@@ -60,9 +62,10 @@ export function AddUserPage() {
       name: 'phone',
       type: 'text',
       placeholder: 'Telefone',
-      errorMessage: 'O telefone é inválido. (+99(99)9999x-9999 sem espaços)',
+      errorMessage: 'O telefone é inválido. (+8 caracteres, somente números)',
       label: 'Telefone',
       required: true,
+      minLength: 8,
       pattern: REGEX_PHONE_NUMBER,
     },
     {
@@ -94,36 +97,27 @@ export function AddUserPage() {
   ];
 
   return (
-    <div className='AddUserPage'>
-      <h1>Adicionar Usuário</h1>
-
-      {loading ? (
-        <Spinner />
-      ) : (
-        <form className='AddUserPage__form' onSubmit={handleSubmit}>
-          {inputs.map((input) => (
-            <FormInput
-              key={input.name}
-              {...input}
-              value={values[input.name as keyof UserInput]}
-              onInputChange={input.name != 'confirmPassword' ? handleInputChange : undefined}
-            />
-          ))}
-          <div className='Select'>
-            <label className='Select__label' htmlFor='role'>
-              Acesso
-            </label>
-            <select className='Select__select' name='role' onChange={handleSelectChange}>
-              <option value={'admin'} label='Administrador'/>
-              <option value={'user'} label='Usuário'/>
-            </select>
-          </div>
-          <button className='Button' type='submit'>
-            Salvar
-          </button>
-          <ErrorMessage label={error?.message} />
-        </form>
-      )}
-    </div>
+    <AddUserPageStyled>
+      <H1 text='Adicionar Usuário' />
+      <form onSubmit={handleSubmit}>
+        {inputs.map((input) => (
+          <FormInput
+            key={input.name}
+            {...input}
+            value={values[input.name as keyof UserInput]}
+            onChange={input.name != 'confirmPassword' ? handleInputChange : undefined}
+          />
+        ))}
+        <div className='Select'>
+          <label htmlFor='role'>Acesso</label>
+          <select name='role' onChange={handleSelectChange} value={values['role']}>
+            <option value='admin'>Administrador</option>
+            <option value='user'>Usuário</option>
+          </select>
+        </div>
+        <Button label='Salvar' type='submit' loading={loading} />
+        <ErrorMessage label={error?.message} />
+      </form>
+    </AddUserPageStyled>
   );
 }
